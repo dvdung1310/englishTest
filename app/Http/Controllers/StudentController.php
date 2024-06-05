@@ -22,7 +22,7 @@ class StudentController extends Controller
         ->join('tbl_admin','tbl_student.sale_id','tbl_admin.admin_id')
         ->orderBy('student_id','desc')
          ->paginate(20)->appends(['search' => $key]);
-        return view('fontend.page.student.list_student',compact('student'));
+        return view('backend.page.student.list_student',compact('student'));
     }
 
     /**
@@ -34,7 +34,7 @@ class StudentController extends Controller
     {
         $teacher = AdminModel::where('admin_level', 3)->where('admin_status', 1)->get();
         $sale = AdminModel::where('admin_level', 2)->where('admin_status', 1)->get();
-        return view('fontend.page.student.add_student', compact('teacher', 'sale'));
+        return view('backend.page.student.add_student', compact('teacher', 'sale'));
     }
 
     /**
@@ -59,7 +59,7 @@ class StudentController extends Controller
             $data['student_status'] = 1;
             $data->save();
             if($data){
-                Mail::send('fontend.page.student.email.email_account', ['data' => $data], function ($message) use ($data) {
+                Mail::send('backend.page.student.email.email_account', ['data' => $data], function ($message) use ($data) {
                     $message->to($data->student_email);
                     $message->subject('Welcome to Our Application');
                 });
