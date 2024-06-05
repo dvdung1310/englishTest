@@ -25,9 +25,30 @@
             <li class="nav-item">
                 <a class="nav-link has-arrow " href="chat-app.html">
                     <i data-feather="message-square" class="nav-icon me-2 icon-xxs">
-                    </i> Tài khoản
+                    </i> Tài khoản 
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navEmail"
+                  aria-expanded="false" aria-controls="navEmail">
+                  <i data-feather="mail" class="nav-icon me-2 icon-xxs">
+                  </i> Học viên
+                </a>
+                <div id="navEmail" class="collapse " data-bs-parent="#sideNavbar">
+                  <ul class="nav flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link has-arrow " href="{{URL::to('student')}}">
+                        Danh sách
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link has-arrow " href="{{route('student.create')}}">
+                       Thêm mới 
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
         </ul>
         <div class="card bg-light shadow-none text-center mx-4 my-8">
             <div class="card-body py-6">

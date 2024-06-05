@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('fontend.page.exams.list_exam');
-});
+Route::get('/',[DashboardController::class,'dashboard']);
+Route::get('login_account',[DashboardController::class,'login_account']);
+Route::post('danh-nhap',[DashboardController::class,'admin_login'])->name('admin_login');
+Route::get('danh-xuat',[DashboardController::class,'logout_admin'])->name('logout_admin');
+//Học viên 
+Route::resource('student','App\Http\Controllers\StudentController');
