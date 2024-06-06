@@ -38,7 +38,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($test as $key=>$item)
+                        @foreach ($exam as $key=>$item)
                         <tr>
                           <th>{{ $key + 1 }}</th>
                           <td class="ps-0">
