@@ -2,7 +2,12 @@
 
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExamController as TestBackend ;;
+use App\Http\Controllers\ExamController as TestBackend ;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+
+;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,10 +25,20 @@ Route::post('danh-nhap',[DashboardController::class,'admin_login'])->name('admin
 Route::get('danh-xuat',[DashboardController::class,'logout_admin'])->name('logout_admin');
 //Học viên 
 Route::resource('student','App\Http\Controllers\StudentController');
-Route::get('/', function () {
-    return view('fontend.page.exams.list_exam');
-});
-
+Route::get('xoa-hoc-vien/{student_id}',[StudentController::class,'delete_student'])->name('delete_student');
+Route::get('sua-hoc-vien/{student_id}',[StudentController::class,'student_edit'])->name('student_edit');
+// Route::get('/', function () {
+//     return view('fontend.page.exams.list_exam');
+// });
+//giáo giên
+Route::resource('teacher','App\Http\Controllers\TeacherController');
+Route::get('xoa-giao-vien/{admin_id}',[TeacherController::class,'delete_teacher'])->name('delete_teacher');
+Route::get('sua-giao-vien/{admin_id}',[TeacherController::class,'teacher_edit'])->name('teacher_edit');
+//sale
+Route::resource('sale','App\Http\Controllers\SaleController');
+Route::get('sua-sale/{admin_id}',[SaleController::class,'sale_edit'])->name('sale_edit');
+Route::get('giao-vien',[SaleController::class,'teacher_sale'])->name('teacher_sale');
+Route::get('hoc-vien',[SaleController::class,'student_sale'])->name('student_sale');
 
 Route::get('/admin', function () {
     return view('backend.page.exams.list_exam');

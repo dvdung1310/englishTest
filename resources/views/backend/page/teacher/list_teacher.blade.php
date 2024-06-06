@@ -1,13 +1,10 @@
 @extends('backend.dashboard')
 @section('content')
-    <?php
-    use App\Http\Controllers\StudentController;
-    ?>
     <div id="app-content">
         <div class="app-content-area">
             <div class="container_list_student">
                 <div class="d-flex justify-content-between mb-4">
-                    <h3>Danh sách học viên</h3>
+                    <h3>Danh sách giáo viên</h3>
                     <form>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="search" value="{{ old('search') }}"
@@ -30,67 +27,26 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>ID</th>
                                 <th>Họ và tên</th>
-                                <th>Tên đăng nhập</th>
-                                <th>SĐT</th>
+                                <th>Tài khoản</th>
+                                {{-- <th>Mật khẩu</th> --}}
                                 <th>Email</th>
-                                <th>Loại học viên</th>
-                                <th>Giáo viên</th>
-                                <th>Sale</th>
                                 <th>Trạng thái</th>
-                                <th colspan="2">Trạng thái</th>
+                                <th colspan="2">Tùy chọn</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($student as $key => $item)
+                            @foreach ($teacher as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->student_lastname }} {{ $item->student_firstname }}</td>
-                                    <td>{{ $item->student_username }}</td>
-                                    <td>{{ $item->student_phone }}</td>
-                                    <td>{{ $item->student_email }}</td>
+                                    <td>{{ $item->admin_id}}</td>
+                                    <td>{{ $item->admin_name }}</td>
+                                    <td>{{ $item->admin_user }}</td>
+                                    {{-- <td>{{ $item->admin_password }}</td> --}}
+                                    <td>{{ $item->admin_email }}</td>
                                     <td>
-                                        <?php
-                                    if ($item->student_type == 1) {
-                                    ?>
-                                        <a href="{{ URL::to('active-news/' . $item->student_id) }}"
-                                            class="btn status_btn_st ">Học viên chính thức</a>
-                                        <?php
-                                    } else {
-                                    ?>
-                                        <a href="{{ URL::to('unactive-news/' . $item->student_id) }}"
-                                            class="btn  status_btn ">Học viên test thử</a>
-                                        <?php
-                                    }
-                                    ?>
-                                    </td>
-                                    <td>
-                                        @if($item->teacher_id != '')
-                                            {{ StudentController::get_admin($item->teacher_id) }}
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($item->sale_id != '')
-                                            {{ StudentController::get_admin($item->sale_id) }}
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <?php
-                                    if ($item->student_status == 1) {
-                                    ?>
-                                        <a href="{{ URL::to('active-news/' . $item->student_id) }}"
-                                            class="btn status_btn_st ">Hoạt động</a>
-                                        <?php
-                                    } else {
-                                    ?>
-                                        <a href="{{ URL::to('unactive-news/' . $item->student_id) }}"
-                                            class="btn  status_btn ">Không hoạt động</a>
-                                        <?php
-                                    }
-                                    ?>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('student_edit',$item->student_id)}}">
+                                        <a href="{{route('teacher_edit',$item->admin_id)}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
                                                 viewBox="0 0 24 24" fill="none">
                                                 <path
@@ -103,7 +59,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('delete_student', $item->student_id) }}" onclick="return confirm('Bạn có muốn xóa học viên này không?')">
+                                        <a href="{{ route('delete_teacher', $item->admin_id) }}" onclick="return confirm('Bạn có muốn xóa học viên này không?')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
                                                 viewBox="0 0 24 24" fill="none">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"

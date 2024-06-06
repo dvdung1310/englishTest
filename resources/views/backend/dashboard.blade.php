@@ -25,18 +25,18 @@
 
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon/favicon.ico') }}">
 
 
     <!-- Libs CSS -->
-    <link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/libs/%40mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/libs/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/%40mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/simplebar/dist/simplebar.min.css') }}" rel="stylesheet">
 
 
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
 
     <title>Đề thi của tôi</title>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
@@ -60,22 +60,22 @@
         <!-- Scripts -->
 
         <!-- Libs JS -->
-        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
-        <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+        <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/feather-icons/dist/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
 
 
 
 
         <!-- Theme JS -->
-        <script src="../assets/js/theme.min.js"></script>
+        <script src="{{ asset('assets/js/theme.min.js') }}"></script>
         <!-- popper js -->
-        <script src="../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+        <script src="{{ asset('assets/libs/%40popperjs/core/dist/umd/popper.min.js') }}"></script>
         <!-- tippy js -->
-        <script src="../assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
-        <script src="../assets/js/vendors/tooltip.js"></script>
-        <script src="../assets/js/vendors/counter.js"></script>
+        <script src="{{ asset('assets/libs/tippy.js/dist/tippy-bundle.umd.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendors/tooltip.js') }}"></script>
+        <script src="{{ asset('assets/js/vendors/counter.js') }}"></script>
 
 
 </body>
