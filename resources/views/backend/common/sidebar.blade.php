@@ -2,7 +2,8 @@
     <div class="h-100" data-simplebar>
         <!-- Brand logo -->
         <a class="navbar-brand" href="../index.html">
-            <img src="../assets/images/brand/logo/logo-2.svg" alt="dash ui - bootstrap 5 admin dashboard template">
+            <img src="{{ asset('assets/images/brand/logo/logo-2.svg') }}"
+                alt="dash ui - bootstrap 5 admin dashboard template">
         </a>
         <!-- Navbar admin nav -->
         <?php
@@ -158,7 +159,7 @@
         @endif
         <div class="card bg-light shadow-none text-center mx-4 my-8">
             <div class="card-body py-6">
-                <img src="../assets/images/background/giftbox.png" alt="dash ui - admin dashboard template">
+                <img src="{{ asset('assets/images/background/giftbox.png') }}" alt="dash ui - admin dashboard template">
                 <div class="mt-4">
                     <h5>Chúc bạn làm bài thi thật tốts</h5>
                     <p class="fs-6 mb-4">
