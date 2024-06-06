@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* .box_login_acc{
+    width: 50%;
+} */
+.box_login_acc img{
+    width: 60%;
+    height: 250px;
+}
+.box_login_acc{
+    background-color:cornflowerblue;
+    padding: 30px;
+    border-radius: 10px;
+}
+.container_create_student {
+    background: #fff;
+}
+.container_create_studen span{
+    color: #cc2626;
+}
+.box_alert {
+    display: none;
+}
+.container_list_student{
+    background: #fff !important;
+    padding: 20px;
+}

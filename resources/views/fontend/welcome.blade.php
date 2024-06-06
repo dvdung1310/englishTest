@@ -32,8 +32,7 @@
     <link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../assets/libs/%40mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../assets/css/theme.min.css">
@@ -44,17 +43,17 @@
 <body>
     <!-- Wrapper -->
     <main id="main-wrapper" class="main-wrapper">
-        
-       <!-- header -->
-       @include('fontend.common.header')
-     <!-- end header -->
+
+        <!-- header -->
+        @include('fontend.common.header')
+        <!-- end header -->
         <!-- Sidebar -->
         @include('fontend.common.sidebar')
-         <!-- end Sidebar -->
+        <!-- end Sidebar -->
 
 
-         @yield('content')
-       
+        @yield('content')
+
         <!-- Scripts -->
 
         <!-- Libs JS -->
@@ -74,7 +73,15 @@
         <script src="../assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
         <script src="../assets/js/vendors/tooltip.js"></script>
         <script src="../assets/js/vendors/counter.js"></script>
-
+        <script>
+            $(document).ready(function() {
+                // Ẩn thông báo khi trang được tải
+                $(".box_alert").hide();
+                if ($(".box_alert").length > 0) {
+                    $(".box_alert").slideDown().delay(5000).slideUp();
+                }
+            });
+        </script>
 
 </body>
 
