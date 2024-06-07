@@ -30,6 +30,10 @@ class examController extends Controller
         return redirect()->back()->with('success', 'Bài test đã được lưu thành công.');
     }
 
+    public function detailExam($exam_id){
+         
+    }
+
     public function skillsExam($exam_id){
         $exam = ExamModel::where('exam_id',$exam_id)->first();
         $skillWriting = EnglishSkillsModel::where('exam_id',$exam_id)->where('type',1)->first();
@@ -47,7 +51,15 @@ class examController extends Controller
             $quesionListening = [];
         }
 
-        return view('backend.page.exams.skills_exam',compact('exam','skillWriting','quesionWriting','skillListening','quesionListening'));
+        $skillReading = EnglishSkillsModel::where('exam_id',$exam_id)->where('type',3)->first();
+        
+        if($skillReading){
+            $quesionReading = QuestionModel::where('skills_id',$skillReading->skills_id)->where('parent_id',0)->get();
+        }else{
+            $quesionReading = [];
+        }
+
+        return view('backend.page.exams.skills_exam',compact('exam','skillWriting','quesionWriting','skillListening','quesionListening','skillReading','quesionReading'));
     }
 
     public function storeWriting(Request $request){
@@ -86,6 +98,25 @@ class examController extends Controller
         $skillListening->save();
         
         return redirect()->back()->with('successWriting', 'Bài lưu Listening thành công.');
+    }
+
+    public function storeReading(Request $request){
+        $data = $request->all();
+        $skillReading = EnglishSkillsModel::where('exam_id',$data['exam_id'])->where('type',3)->first();
+        if(isset($skillReading)){
+            $skillReading->skills_status = 1;
+            $skillReading->skills_time = $data['skills_time'];
+        }else{
+            $skillReading = new EnglishSkillsModel();
+            $skillReading->skills_name = 'READING';
+            $skillReading->skills_status = 1;
+            $skillReading->skills_time = $data['skills_time'];
+            $skillReading->exam_id = $data['exam_id'];
+            $skillReading->type = 3;
+        }
+        $skillReading->save();
+        
+        return redirect()->back()->with('successReading', 'Bài lưu Reading thành công.');
     }
 
 
@@ -138,6 +169,17 @@ class examController extends Controller
 
     }
 
+    public function storePassageReading(Request $request){
+        $data = $request->all();
+        $passage = new QuestionModel();
+        $passage->question_name = $data['question_name'];
+        $passage->question_status = 1;
+        $passage->parent_id = 0;
+        $passage->skills_id = $data['skills_id'];
+        $passage->save();
+        return redirect()->back()->with('successPassage', 'File âm thanh đã được lưu thành công.');
+    }
+
     public function detailQuestionWriting($question_id){
         $quesion =  QuestionModel::where('question_id',$question_id)->first();
         $quesionChildren =  QuestionModel::where('parent_id',$quesion->question_id)->first();
@@ -169,6 +211,17 @@ class examController extends Controller
         return view('backend.page.exams.add_question_listening',compact('question_music','quesionCate'));
     }
 
+    public function addQuestionReading($question_id){
+        // file âm thanh
+        $question_passage =  QuestionModel::where('question_id',$question_id)->first();
+        if($question_passage){
+            $quesionCate =  QuestionModel::where('parent_id',$question_passage->question_id)->get();
+        }else{
+            $quesionCate = [];
+        }
+        return view('backend.page.exams.add_question_reading',compact('question_passage','quesionCate'));
+    }
+
     public function storeQuestionListening(Request $request){
         $data = $request->all();
         $question = new QuestionModel();
@@ -178,6 +231,33 @@ class examController extends Controller
         $question->skills_id = $data['skills_id'];
         $question->save();
          return redirect()->back()->with('success', 'Bạn đã lưu câu hỏi thành công.');
+    }
+
+    public function storeQuestionReading(Request $request){
+        $data = $request->all();
+        $question = new QuestionModel();
+        $question->question_name = $data['question_name'];
+        $question->question_status = 1;
+        $question->parent_id = $data['question_id'];
+        $question->skills_id = $data['skills_id'];
+        $question->save();
+         return redirect()->back()->with('success', 'Bạn đã lưu câu hỏi con thành công.');
+    }
+
+    public function updateQuestionCateListening(Request $request){
+        $data = $request->all();
+        $question = QuestionModel::where('question_id',$data['question_cate_id'])->first();
+        $question->question_name = $data['question_name'];
+        $question->save();
+        return redirect()->route('detail_question_listening',['question_music_id'=>$data['question_music_id'],'question_cate_id'=>$data['question_cate_id']]);
+    }
+
+    public function updateQuestionCateReading(Request $request){
+        $data = $request->all();
+        $question = QuestionModel::where('question_id',$data['question_cate_id'])->first();
+        $question->question_name = $data['question_name'];
+        $question->save();
+        return redirect()->route('detail_question_reading',['question_passage_id'=>$data['question_passage_id'],'question_cate_id'=>$data['question_cate_id']]);
     }
 
     public function detailQuestionListening($question_music_id , $question_cate_id){
@@ -194,6 +274,21 @@ class examController extends Controller
         $questionChildren =  QuestionModel::where('parent_id',$questionCate->question_id)->get();
         
         return view('backend.page.exams.detail_question_listening',compact('question_music','quesionListCate','questionCate','questionChildren'));
+    }
+
+    public function detailQuestionReading($question_passage_id , $question_cate_id){
+        $question_passage =  QuestionModel::where('question_id',$question_passage_id)->first();
+        if($question_passage){
+            // danh sachs
+            $quesionListCate =  QuestionModel::where('parent_id',$question_passage->question_id)->get();
+        }else{
+            $quesionListCate = [];
+        }
+
+        $questionCate =  QuestionModel::where('question_id',$question_cate_id)->first();
+        $questionChildren =  QuestionModel::where('parent_id',$questionCate->question_id)->get();
+        
+        return view('backend.page.exams.detail_question_reading',compact('question_passage','quesionListCate','questionCate','questionChildren'));
     }
 
     public static function  getAnswerByQuestionId($quesionId){
@@ -221,6 +316,27 @@ class examController extends Controller
       }
       return redirect()->route('detail_question_listening',['question_music_id'=>$question_music_id,'question_cate_id'=>$question_cate_id]);
     }
+
+    public function storeQuestionAnswerReading(Request $request){
+        $data = $request->all();
+        $question_music_id = $data['question_music_id'];
+        $question_cate_id = $data['parent_id'];
+        $question = new QuestionModel();
+        $question->question_name = $data['question_name'];
+        $question->question_status = 1;
+        $question->parent_id = $data['parent_id'];
+        $question->skills_id = $data['skills_id'];
+        $question->save();
+        if($question){
+          $answer = new QuestionAnswerModel();
+          $answer->answer_name = $data['question_answer'];
+          $answer->answer_boolean = 1;
+          $answer->answer_status = 1;
+          $answer->question_id = $question->question_id;
+          $answer->save();
+        }
+        return redirect()->route('detail_question_reading',['question_passage_id'=>$question_music_id,'question_cate_id'=>$question_cate_id]);
+      }
 
     public function storeQuestionAnswerChoiceListening(Request $request){
         $data = $request->all();
@@ -288,5 +404,73 @@ class examController extends Controller
           
         }
         return redirect()->route('detail_question_listening',['question_music_id'=>$question_music_id,'question_cate_id'=>$question_cate_id]);
+      }
+
+      public function storeQuestionAnswerChoiceReading(Request $request){
+        $data = $request->all();
+        $question_music_id = $data['question_music_id'];
+        $question_cate_id = $data['parent_id'];
+        $question = new QuestionModel();
+        $question->question_name = $data['question_name'];
+        $question->question_status = 1;
+        $question->parent_id = $data['parent_id'];
+        $question->skills_id = $data['skills_id'];
+        $question->save();
+        if($question){
+            if(!empty($data['question_answer_1'])){
+                $answer = new QuestionAnswerModel();
+                $answer->answer_name = $data['question_answer_1'];
+                if($data['radio'] == 'A'){
+                    $answer->answer_boolean = 1;
+                }else{
+                    $answer->answer_boolean = 0;
+                }
+                
+                $answer->answer_status = 1;
+                $answer->question_id = $question->question_id;
+                $answer->save();
+            }
+
+            if(!empty($data['question_answer_2'])){
+                $answer = new QuestionAnswerModel();
+                $answer->answer_name = $data['question_answer_2'];
+                if($data['radio'] == 'B'){
+                    $answer->answer_boolean = 1;
+                }else{
+                    $answer->answer_boolean = 0;
+                }
+                $answer->answer_status = 1;
+                $answer->question_id = $question->question_id;
+                $answer->save();
+            }
+
+            if(!empty($data['question_answer_3'])){
+                $answer = new QuestionAnswerModel();
+                $answer->answer_name = $data['question_answer_3'];
+                if($data['radio'] == 'C'){
+                    $answer->answer_boolean = 1;
+                }else{
+                    $answer->answer_boolean = 0;
+                }
+                $answer->answer_status = 1;
+                $answer->question_id = $question->question_id;
+                $answer->save();
+            }
+
+            if(!empty($data['question_answer_4'])){
+                $answer = new QuestionAnswerModel();
+                $answer->answer_name = $data['question_answer_4'];
+                if($data['radio'] == 'D'){
+                    $answer->answer_boolean = 1;
+                }else{
+                    $answer->answer_boolean = 0;
+                }
+                $answer->answer_status = 1;
+                $answer->question_id = $question->question_id;
+                $answer->save();
+            }
+          
+        }
+        return redirect()->route('detail_question_reading',['question_passage_id'=>$question_music_id,'question_cate_id'=>$question_cate_id]);
       }
 }

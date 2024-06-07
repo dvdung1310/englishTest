@@ -5,9 +5,6 @@
             <a class="navbar-brand d-block d-md-none" href="../index.html">
                 <img src="{{ asset('assets/images/brand/logo/logo-2.svg') }}" alt="Image">
             </a>
-
-
-
             <a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
                     class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
@@ -38,8 +35,7 @@
                 </form>
             </div>
             <!--Navbar nav -->
-            <ul
-                class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+            <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
                 <a href="#"
                     class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
@@ -50,8 +46,7 @@
 
                 <li class="dropdown stopevent ms-2">
                     <a class="btn btn-ghost btn-icon rounded-circle" href="#!" role="button"
-                        id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                        id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-xs" data-feather="bell"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
@@ -141,26 +136,36 @@
                 </li>
                 <!-- List -->
                 <li class="dropdown ms-2">
-                    <a class="rounded-circle" href="#!" role="button" id="dropdownUser"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="rounded-circle" href="#!" role="button" id="dropdownUser" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-md avatar-indicators avatar-online">
+
                             <img alt="avatar" src="{{ asset('assets/images/avatar/avatar-11.jpg') }}"
                                 class="rounded-circle">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                         <div class="px-4 pb-0 pt-2">
-
-
                             <div class="lh-1 ">
-                                <h5 class="mb-1"> John E. Grainger</h5>
-                                <a href="#!" class="text-inherit fs-6">View my profile</a>
+                                <h5 class="mb-1">
+                                    @php
+                                        $admin_name = Session::get('admin')->admin_name;
+                                        if ($admin_name) {
+                                            echo $admin_name;
+                                        }
+                                    @endphp
+                                </h5>
+                                <a href="#" class="text-inherit fs-6">
+                                    @if (Session::get('admin')->admin_level == 1)
+                                        Admin
+                                    @elseif(Session::get('admin')->admin_level == 2)
+                                        Sale
+                                    @endif
+                                </a>
                             </div>
                             <div class=" dropdown-divider mt-3 mb-2"></div>
                         </div>
-
                         <ul class="list-unstyled">
-
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="#!">
                                     <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>Edit
@@ -168,30 +173,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#!">
-                                    <i class="me-2 icon-xxs dropdown-item-icon"
-                                        data-feather="activity"></i>Activity Log
-                                </a>
-
-
-                            </li>
-
-
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#!">
-
-                                    <i class="me-2 icon-xxs dropdown-item-icon"
-                                        data-feather="settings"></i>Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="../index.html">
+                                <a class="dropdown-item" href="{{route('logout_admin')}}">
                                     <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>Sign
                                     Out
                                 </a>
                             </li>
                         </ul>
-
                     </div>
                 </li>
             </ul>

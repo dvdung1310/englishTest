@@ -55,14 +55,8 @@
                             <span class="badge badge-success-soft">Active</span>
                           </td>
                           <td>
-                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                              data-template="eyeOne">
-                              <i data-feather="eye" class="icon-xs"></i>
-                              <div id="eyeOne" class="d-none">
-                                <span>View</span>
-                              </div>
-                            </a>
-                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                            
+                            <a href="" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
                               data-template="editOne">
                               <i data-feather="edit" class="icon-xs"></i>
                               <div id="editOne" class="d-none">
