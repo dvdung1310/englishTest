@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\ExamController as ExamFrontend ;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 
 ;
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\TeacherController;
 |
 */
 
-Route::get('/',[DashboardController::class,'dashboard']);
+Route::get('dashboard',[DashboardController::class,'dashboard']);
 Route::get('login_account',[DashboardController::class,'login_account']);
 Route::post('danh-nhap',[DashboardController::class,'admin_login'])->name('admin_login');
 Route::get('danh-xuat',[DashboardController::class,'logout_admin'])->name('logout_admin');
@@ -38,12 +39,6 @@ Route::get('sua-sale/{admin_id}',[SaleController::class,'sale_edit'])->name('sal
 Route::get('giao-vien',[SaleController::class,'teacher_sale'])->name('teacher_sale');
 Route::get('hoc-vien',[SaleController::class,'student_sale'])->name('student_sale');
 
-Route::get('/', function () {
-    return view('fontend.page.exams.list_exam');
-});
-Route::get('/admin', function () {
-    return view('backend.page.exams.list_exam');
-})->name('admin');
 
 Route::get('/add_exam', function () {
     return view('backend.page.exams.add_exam');
@@ -68,6 +63,7 @@ Route::post('/store_question_listening',[TestBackend::class,'storeQuestionListen
 Route::get('/detail_question_listening/{question_music_id}/{question_cate_id}',[TestBackend::class,'detailQuestionListening'])->name('detail_question_listening');
 Route::get('/store_question_answer_listening',[TestBackend::class,'storeQuestionAnswerListening'])->name('store_question_answer_listening');
 Route::get('/store_question_answer_choice_listening',[TestBackend::class,'storeQuestionAnswerChoiceListening'])->name('store_question_answer_choice_listening');
+
 Route::get('/update_question_cate_listening',[TestBackend::class,'updateQuestionCateListening'])->name('update_question_cate_listening');
 // reading
 Route::get('/store_reading',[TestBackend::class,'storeReading'])->name('store_reading');
@@ -88,3 +84,10 @@ Route::get('/store_skills_listening_user',[ExamFrontend::class,'storeSkillListen
 Route::get('/store_skills_reading_user',[ExamFrontend::class,'storeSkillReadingUser'])->name('store_skills_reading_user');
 // test 
 Route::get('/test_view',[ExamFrontend::class,'testView'])->name('test_view');
+
+//frontend
+Route::get('/',[UserController::class,'home']);
+Route::get('dang-nhap-tai-khoan',[UserController::class,'login_user']);
+Route::post('dangnhap',[UserController::class,'user_login'])->name('user_login');
+Route::get('dang-xuat-tai-khoan',[UserController::class,'logout_user'])->name('logout_user');
+

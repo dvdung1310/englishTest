@@ -101,7 +101,7 @@ class StudentController extends Controller
             if($data){
                 Mail::send('backend.page.student.email.email_account', ['data' => $data], function ($message) use ($data) {
                     $message->to($data->student_email);
-                    $message->subject('Welcome to Our Application');
+                    $message->subject('Chào mừng bạn đến với VUE!');
                 });
             }
             return back()->with('message', 'Thêm mới thành công !');

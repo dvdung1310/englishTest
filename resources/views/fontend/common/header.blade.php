@@ -150,18 +150,15 @@
                             <div class="lh-1 ">
                                 <h5 class="mb-1">
                                     @php
-                                        $admin_name = Session::get('admin')->admin_name;
-                                        if ($admin_name) {
-                                            echo $admin_name;
+                                        $user_firstName = Session::get('user')->student_firstname;
+                                        $user_lastName = Session::get('user')->student_lastname;
+                                        if ($user_firstName) {
+                                            echo $user_lastName.' '.$user_firstName;
                                         }
                                     @endphp
                                 </h5>
                                 <a href="#" class="text-inherit fs-6">
-                                    @if (Session::get('admin')->admin_level == 1)
-                                        Admin
-                                    @elseif(Session::get('admin')->admin_level == 2)
-                                        Sale
-                                    @endif
+                                    Học viên
                                 </a>
                             </div>
                             <div class=" dropdown-divider mt-3 mb-2"></div>
@@ -174,7 +171,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{route('logout_admin')}}">
+                                <a class="dropdown-item" href="{{route('logout_user')}}">
                                     <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>Sign
                                     Out
                                 </a>

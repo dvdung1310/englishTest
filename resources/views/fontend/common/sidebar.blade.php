@@ -1,9 +1,11 @@
 <div class="navbar-vertical navbar nav-dashboard">
     <div class="h-100" data-simplebar>
         <!-- Brand logo -->
-        <a class="navbar-brand" href="../index.html">
-            <img src="../assets/images/brand/logo/logo-2.svg" alt="dash ui - bootstrap 5 admin dashboard template">
+        <a class="navbar-brand" href="{{URL::to('/')}}">
+            <img src="{{asset('frontend/images/logo-app.png')}}"
+                alt="dash ui - bootstrap 5 admin dashboard template">
         </a>
+<<<<<<< HEAD
        
         
             <ul class="navbar-nav flex-column" id="sideNavbar">
@@ -134,6 +136,9 @@
                 </li>
             </ul>
        
+=======
+        <!-- Navbar admin nav -->
+>>>>>>> 8469fd47b502a85bfab77b2336a5c0e562463856
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
                 <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
@@ -152,7 +157,10 @@
                 </div>
             </li>
         </ul>
+<<<<<<< HEAD
        
+=======
+>>>>>>> 8469fd47b502a85bfab77b2336a5c0e562463856
         <div class="card bg-light shadow-none text-center mx-4 my-8">
             <div class="card-body py-6">
                 <img src="../assets/images/background/giftbox.png" alt="dash ui - admin dashboard template">
