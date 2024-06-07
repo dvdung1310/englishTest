@@ -11,7 +11,7 @@
 </head>
 <style>
     body {
-        background-image: url('frontend/images/background_login.jpg');
+        background-image: url('frontend/images/bg_login1.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         padding-top: 100px;
@@ -25,7 +25,7 @@
         <div class="row d-flex justify-content-center align-content-center">
             <div class="col-md-8 d-flex box_login_acc">
                 <div class="box_banner_login">
-                    <img src="{{ asset('frontend/images/banner_1.jpg') }}" alt="">
+                    <img src="{{ asset('frontend/images/banner_2.jpg') }}" alt="">
                 </div>
                 <div class="flex-fill box_info_login">
                     <div class="logo_login ">

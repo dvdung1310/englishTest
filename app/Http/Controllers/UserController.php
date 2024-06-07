@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExamModel;
 use App\Models\StudentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -12,17 +13,18 @@ class UserController extends Controller
 {
     public function check_login()
     {
-        $admin = Session::get('admin');
-        if ($admin) {
-            return Redirect::to('dashboard');
+        $user = Session::get('user');
+        if ($user) {
+            return Redirect::to('/');
         } else {
-            return Redirect::to('login_account')->send();
+            return Redirect::to('dang-nhap-tai-khoan')->send();
         }
     }
     public function home()
     {
         $this->check_login();
-        return view('fontend.page.exams.list_exam');
+        $exam = ExamModel::all();
+        return view('fontend.page.exams.list_exam',compact('exam'));
     }
     public function login_user()
     {

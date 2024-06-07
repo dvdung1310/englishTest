@@ -32,15 +32,24 @@ use App\Http\Controllers\ExamController;
                         .css_true p{
                          font-weight:bold;
                         }
+
+                        .btn-active-tim{
+                            color: #fff;
+                            border-color: #020560;
+                            background-color: #020560;
+                            box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+                            padding: 10px;
+                            margin-left: 20px;
+                        }
+                        
                     </style>
 
-                    <div class="col-lg-12 col-12">
-                        <div class="d-flex align-items-center">
-                            <label class="form-label fw-bold me-3 mb-0">File âm thanh :</label>
-                            <audio controls>
-                                <source src="{{ asset($question_music->question_name) }}"
-                                    type="audio/{{ pathinfo($question_music->question_name, PATHINFO_EXTENSION) }}">
-                            </audio>
+                    <div class="col-lg-12 col-12 mb-5">
+                        <div class="editorContainer">
+                            <label class="form-label fw-bold me-3 mb-2">READING PASSAGE</label>
+                            <textarea id="question_passage">
+                                {{ $question_passage->question_name }}
+                            </textarea>
                         </div>
                     </div>
                     <div class="col-lg-12 col-12">
@@ -48,9 +57,16 @@ use App\Http\Controllers\ExamController;
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 @foreach ($quesionListCate as $key => $item)
-                                    <a
-                                        href="{{ route('detail_question_listening', ['question_music_id' => $question_music->question_id, 'question_cate_id' => $item->question_id]) }}">
-                                        <button class="btn-question-writing btn">Question {{ $key + 1 }}</button>
+                                @php
+                                    if($item->question_id == $questionCate->question_id){
+                                      $class_active_bg = 'btn-active-tim';
+                                    }else{
+                                      $class_active_bg = 'btn-question-writing';
+                                    }
+                                @endphp
+                                    <a class=""
+                                        href="{{ route('detail_question_reading', ['question_passage_id' => $question_passage->question_id, 'question_cate_id' => $item->question_id]) }}">
+                                        <button class="btn {{ $class_active_bg }}">Question {{ $key + 1 }}</button>
                                     </a>
                                 @endforeach
                             </div>
@@ -76,21 +92,21 @@ use App\Http\Controllers\ExamController;
                         <div class="tab-content p-4" id="pills-tabContent">
                             <div class="tab-pane fade" id="pills_home_id" role="tabpanel" aria-labelledby="tab_by_id">
                                 <div class="card mb-4">
-                                    <form action="{{ route('store_question_listening') }}" method="post"
+                                    <form action="{{ route('store_question_reading') }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" value="{{ $question_music->question_id }}" name="question_id">
-                                        <input type="hidden" value="{{ $question_music->skills_id }}" name="skills_id">
+                                        <input type="hidden" value="{{ $question_passage->question_id }}" name="question_id">
+                                        <input type="hidden" value="{{ $question_passage->skills_id }}" name="skills_id">
                                         <div class="card-body">
                                             <div>
                                                 <div class="mb-5 editorContainer">
-                                                    <label class="form-label fw-bold">Câu hỏi chung</label>
+                                                    <label class="form-label fw-bold">Câu hỏi con</label>
                                                     <textarea name="question_name" class="form-control " id="editor_listening"></textarea>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <button id="writingsubmit" type="submit" class="btn btn-primary">
-                                                    Lưu câu hỏi
+                                                    Lưu câu hỏi con
                                                 </button>
                                             </div>
                                         </div>
@@ -103,22 +119,22 @@ use App\Http\Controllers\ExamController;
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card mb-4">
-                                    <form action="{{ route('update_question_cate_listening') }}" method="get"
+                                    <form action="{{ route('update_question_cate_reading') }}" method="get"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" value="{{ $question_music->question_id }}" name="question_music_id">
-                                        <input type="hidden" value="{{ $question_music->skills_id }}" name="skills_id">
+                                        <input type="hidden" value="{{ $question_passage->question_id }}" name="question_passage_id">
+                                        <input type="hidden" value="{{ $question_passage->skills_id }}" name="skills_id">
                                         <input type="hidden" value="{{ $questionCate->question_id }}" name="question_cate_id">
                                         <div class="card-body">
                                             <div>
                                                 <div class="mb-5 editorContainer">
-                                                    <label class="form-label fw-bold">Câu hỏi chung</label>
+                                                    <label class="form-label fw-bold">Câu hỏi con </label>
                                                     <textarea name="question_name" class="form-control " id="editor_question_listening">{{ $questionCate->question_name }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <button id="writingsubmit" type="submit" class="btn btn-primary">
-                                                    Sửa câu hỏi
+                                                    Sửa câu hỏi con Reading
                                                 </button>
                                             </div>
                                         </div>
@@ -145,12 +161,12 @@ use App\Http\Controllers\ExamController;
                                     <div class="tab-content p-3 pb-0" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                             aria-labelledby="pills-home-tab">
-                                            <form action="{{ route('store_question_answer_listening') }}" method="get">
+                                            <form action="{{ route('store_question_answer_reading') }}" method="get">
                                                 <input type="hidden" name="parent_id"
                                                     value="{{ $questionCate->question_id }}">
                                                 <input type="hidden" value="{{ $questionCate->skills_id }}"
                                                     name="skills_id">
-                                                <input type="hidden" value="{{ $question_music->question_id }}"
+                                                <input type="hidden" value="{{ $question_passage->question_id }}"
                                                     name="question_music_id">
 
                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
@@ -170,13 +186,13 @@ use App\Http\Controllers\ExamController;
                                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                             aria-labelledby="pills-profile-tab">
 
-                                            <form action="{{ route('store_question_answer_choice_listening') }}"
+                                            <form action="{{ route('store_question_answer_choice_reading') }}"
                                                 method="get">
                                                 <input type="hidden" name="parent_id"
                                                     value="{{ $questionCate->question_id }}">
                                                 <input type="hidden" value="{{ $questionCate->skills_id }}"
                                                     name="skills_id">
-                                                <input type="hidden" value="{{ $question_music->question_id }}"
+                                                <input type="hidden" value="{{ $question_passage->question_id }}"
                                                     name="question_music_id">
 
                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
@@ -310,6 +326,13 @@ use App\Http\Controllers\ExamController;
         </div>
     </div>
     <script>
+
+            ClassicEditor
+            .create(document.querySelector('#question_passage'))
+            .catch(error => {
+                console.error(error);
+            });
+
         ClassicEditor
             .create(document.querySelector('#editor_listening'))
             .catch(error => {

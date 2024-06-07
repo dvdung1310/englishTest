@@ -5,25 +5,23 @@
             <img src="{{asset('frontend/images/logo-app.png')}}"
                 alt="dash ui - bootstrap 5 admin dashboard template">
         </a>
-        <!-- Navbar admin nav -->
-        <ul class="navbar-nav flex-column" id="sideNavbar">
-            <li class="nav-item">
-                <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
-                    data-bs-target="#navEmail" aria-expanded="false" aria-controls="navEmail">
-                    <i data-feather="mail" class="nav-icon me-2 icon-xxs">
-                    </i> Học viên
-                </a>
-                <div id="navEmail" class="collapse " data-bs-parent="#sideNavbar">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link has-arrow " href="{{ URL::to('student') }}">
-                                Danh sách
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+            <ul class="navbar-nav flex-column" id="sideNavbar">
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class="nav-link has-arrow " href="/">
+                        <i data-feather="calendar" class="nav-icon me-2 icon-xxs">
+                        </i> Đề thi
+                    </a>
+                </li>
+                <!-- Nav item -->
+                <li class="nav-item">
+                    <a class="nav-link has-arrow " href="chat-app.html">
+                        <i data-feather="message-square" class="nav-icon me-2 icon-xxs">
+                        </i> Tài khoản
+                    </a>
+                </li>
+                
+            </ul>
         <div class="card bg-light shadow-none text-center mx-4 my-8">
             <div class="card-body py-6">
                 <img src="../assets/images/background/giftbox.png" alt="dash ui - admin dashboard template">

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\AdminModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-session_start();
+// session_start();
 use function PHPUnit\Framework\returnSelf;
 
 class TeacherController extends Controller
@@ -142,5 +143,22 @@ class TeacherController extends Controller
         } catch (\Throwable $th) {
             return back()->with('error', 'Xóa học viên không thành công !');
         }
+    }
+
+    public function teacher_student(Request $request){
+       
+        $this->check_login();
+        $key = $request->search;
+        $admin_id = Session::get('admin')->admin_id;
+        
+        if(Session::get('admin')->admin_level==3){
+            $student = DB::table('tbl_student')
+            ->orderBy('student_id','desc')
+            ->where('teacher_id', $admin_id)
+            ->where('student_firstname','like','%'.$key.'%')
+            ->paginate(20)->appends(['search' => $key]);
+            return view('backend.page.teacher.student.list_student',compact('student'));
+        }
+
     }
 }

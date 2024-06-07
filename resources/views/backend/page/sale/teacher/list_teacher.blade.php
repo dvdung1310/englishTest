@@ -1,4 +1,4 @@
-@extends('fontend.welcome')
+@extends('backend.dashboard')
 @section('content')
     <div id="app-content">
         <div class="app-content-area">

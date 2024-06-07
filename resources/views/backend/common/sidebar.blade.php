@@ -13,7 +13,7 @@
             <ul class="navbar-nav flex-column" id="sideNavbar">
                 <!-- Nav item -->
                 <li class="nav-item">
-                    <a class="nav-link has-arrow " href="calendar.html">
+                    <a class="nav-link has-arrow " href="{{ route('list_exam') }}">
                         <i data-feather="calendar" class="nav-icon me-2 icon-xxs">
                         </i> Đề thi
                     </a>
@@ -140,6 +140,12 @@
         @elseif($admin_level == 3)
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
+                <a class="nav-link has-arrow " href="{{ route('list_exam') }}">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs">
+                    </i> Đề thi
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
                     data-bs-target="#navEmail" aria-expanded="false" aria-controls="navEmail">
                     <i data-feather="mail" class="nav-icon me-2 icon-xxs">
@@ -148,7 +154,7 @@
                 <div id="navEmail" class="collapse " data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link has-arrow " href="{{ URL::to('student') }}">
+                            <a class="nav-link has-arrow " href="{{ route('teacher_student') }}">
                                 Danh sách
                             </a>
                         </li>

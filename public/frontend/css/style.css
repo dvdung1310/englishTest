@@ -55,6 +55,42 @@
     min-width: 70px;
     text-align: center;
 }
+
+#countdown {
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #29B6F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.phantiep {
+    background: #29B6F6;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    margin: 20px 0;
+}
+
+.listening_radio p{
+  margin-bottom:0 ;
+  font-size: 17px;
+}
+
+.listening_radio input{
+    width: 17px;
+}
+
+.listening_question_name{
+    font-size: 18px;
+}
 .table>:not(caption)>*>* {
     padding: 7px !important;
 }
@@ -73,12 +109,14 @@
 .box_login_acc .box_banner_login img{
     width: 100%;
     height: 380px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 .container_login .row .col-md-8{
     padding: 0;
 }
 .box_info_login{
-    padding: 15px;
+    padding: 20px;
 }
 .box_info_login h5{
     color: #fff;

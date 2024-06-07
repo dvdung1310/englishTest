@@ -98,11 +98,27 @@ class StudentController extends Controller
             $data['sale_id'] = $request->sale_id;
             $data['student_status'] = 1;
             $data->save();
+            $sale_id = $data->sale_id;
+            $teacher_id = $data->teacher_id;
+            $sale_info = AdminModel::where('admin_id',$sale_id)->first();
+            $teacher_info = AdminModel::where('admin_id',$teacher_id)->first();
             if($data){
                 Mail::send('backend.page.student.email.email_account', ['data' => $data], function ($message) use ($data) {
                     $message->to($data->student_email);
                     $message->subject('Chào mừng bạn đến với VUE!');
                 });
+
+                Mail::send('backend.page.teacher.email.email_teacher', ['data' => $data], function ($message) use ($teacher_info) {
+                    $message->to($teacher_info->admin_email);
+                    $message->subject('VUE thông báo!');
+                });
+
+                Mail::send('backend.page.sale.email.email_sale', ['data' => $data], function ($message) use ($sale_info) {
+                    $message->to($sale_info->admin_email);
+                    $message->subject('VUE thông báo!');
+                });
+
+
             }
             return back()->with('message', 'Thêm mới thành công !');
         } catch (\Throwable $th) {

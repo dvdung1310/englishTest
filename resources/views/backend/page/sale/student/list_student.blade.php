@@ -38,7 +38,8 @@
                                 <th>Giáo viên</th>
                                 <th>Sale</th>
                                 <th>Trạng thái</th>
-                                <th colspan="2">Trạng thái</th>
+                                <th colspan="2">Tùy chọn</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -53,16 +54,17 @@
                                         <?php
                                     if ($item->student_type == 1) {
                                     ?>
-                                        <a href="{{ URL::to('active-news/' . $item->student_id) }}"
-                                            class="btn status_btn_st ">Học viên chính thức</a>
+                                        <a 
+                                            class="btn status_btn p-0">chính thức</a>
                                         <?php
                                     } else {
                                     ?>
-                                        <a href="{{ URL::to('unactive-news/' . $item->student_id) }}"
-                                            class="btn  status_btn ">Học viên test thử</a>
+                                        <a 
+                                            class="btn   status_btn_st p-0">test thử</a>
                                         <?php
                                     }
                                     ?>
+                                    </td>
                                     </td>
                                     <td>
                                         @if($item->teacher_id != '')
@@ -74,17 +76,17 @@
                                             {{ StudentController::get_admin($item->sale_id) }}
                                         @endif
                                     </td>
-                                    <td>
+                                    <td >
                                         <?php
                                     if ($item->student_status == 1) {
                                     ?>
-                                        <a href="{{ URL::to('active-news/' . $item->student_id) }}"
-                                            class="btn status_btn_st ">Hoạt động</a>
+                                        <a 
+                                            class="btn  status_btn">Hoạt động</a>
                                         <?php
                                     } else {
                                     ?>
-                                        <a href="{{ URL::to('unactive-news/' . $item->student_id) }}"
-                                            class="btn  status_btn ">Không hoạt động</a>
+                                        <a 
+                                            class="btn  status_btn_st ">Không hoạt động</a>
                                         <?php
                                     }
                                     ?>
@@ -127,6 +129,7 @@
                                             </svg>
                                         </a>
                                     </td>
+                                    
                                 </tr>
                             @endforeach
 
