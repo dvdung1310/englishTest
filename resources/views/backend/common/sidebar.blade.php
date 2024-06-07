@@ -1,7 +1,7 @@
 <div class="navbar-vertical navbar nav-dashboard">
     <div class="h-100" data-simplebar>
         <!-- Brand logo -->
-        <a class="navbar-brand" href="{{URL::to('/')}}">
+        <a class="navbar-brand" href="{{URL::to('dashboard')}}">
             <img src="{{asset('frontend/images/logo-app.png')}}"
                 alt="dash ui - bootstrap 5 admin dashboard template">
         </a>

@@ -26,6 +26,7 @@ Route::post('danh-nhap',[DashboardController::class,'admin_login'])->name('admin
 Route::get('danh-xuat',[DashboardController::class,'logout_admin'])->name('logout_admin');
 //Học viên 
 Route::resource('student','App\Http\Controllers\StudentController');
+
 Route::get('xoa-hoc-vien/{student_id}',[StudentController::class,'delete_student'])->name('delete_student');
 Route::get('sua-hoc-vien/{student_id}',[StudentController::class,'student_edit'])->name('student_edit');
 //giáo giên
@@ -39,7 +40,6 @@ Route::get('giao-vien',[SaleController::class,'teacher_sale'])->name('teacher_sa
 Route::get('hoc-vien',[SaleController::class,'student_sale'])->name('student_sale');
 
 
-
 Route::get('/add_exam', function () {
     return view('backend.page.exams.add_exam');
 })->name('add_exam');
@@ -51,10 +51,8 @@ Route::get('/skills_exam/{exam_id}',[TestBackend::class,'skillsExam'])->name('sk
 Route::get('/store_writing',[TestBackend::class,'storeWriting'])->name('store_writing');
 Route::get('/add_question_writing/{skills_id}',[TestBackend::class,'addQuestionWriting'])->name('add_question_writing');
 Route::get('/store_question_writing',[TestBackend::class,'storeQuestionWriting'])->name('store_question_writing');
-Route::get('/store_question_writing',[TestBackend::class,'storeQuestionWriting'])->name('store_question_writing');
 Route::get('/detail_question_writing/{question_id}',[TestBackend::class,'detailQuestionWriting'])->name('detail_question_writing');
 Route::get('/update_question_writing',[TestBackend::class,'updateQuestionWriting'])->name('update_question_writing');
-
 // listening
 Route::get('/store_listening',[TestBackend::class,'storeListening'])->name('store_listening');
 Route::get('/add_music_listening/{skills_id}',[TestBackend::class,'addMusicListening'])->name('add_music_listening');
@@ -65,10 +63,12 @@ Route::get('/detail_question_listening/{question_music_id}/{question_cate_id}',[
 Route::get('/store_question_answer_listening',[TestBackend::class,'storeQuestionAnswerListening'])->name('store_question_answer_listening');
 Route::get('/store_question_answer_choice_listening',[TestBackend::class,'storeQuestionAnswerChoiceListening'])->name('store_question_answer_choice_listening');
 
-
-
 //frontend
 Route::get('/',[UserController::class,'home']);
 Route::get('dang-nhap-tai-khoan',[UserController::class,'login_user']);
 Route::post('dangnhap',[UserController::class,'user_login'])->name('user_login');
 Route::get('dang-xuat-tai-khoan',[UserController::class,'logout_user'])->name('logout_user');
+
+Route::get('/store_question_writing',[TestBackend::class,'storeQuestionWriting'])->name('store_question_writing');
+
+
