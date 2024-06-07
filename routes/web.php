@@ -75,7 +75,6 @@ Route::get('/update_question_cate_reading',[TestBackend::class,'updateQuestionCa
 Route::get('/store_question_answer_reading',[TestBackend::class,'storeQuestionAnswerReading'])->name('store_question_answer_reading');
 Route::get('/store_question_answer_choice_reading',[TestBackend::class,'storeQuestionAnswerChoiceReading'])->name('store_question_answer_choice_reading');
 // FRONTEND
-Route::get('/',[ExamFrontend::class,'listExam'])->name('list_exam_frontend');
 Route::get('/startExamWriting/{exam_id}',[ExamFrontend::class,'getQuizWriting'])->name('startExamWriting');
 Route::get('/startExamListening/{exam_id}',[ExamFrontend::class,'getQuizListening'])->name('startExamListening');
 Route::get('/startExamReading/{exam_id}',[ExamFrontend::class,'getQuizReading'])->name('startExamReading');

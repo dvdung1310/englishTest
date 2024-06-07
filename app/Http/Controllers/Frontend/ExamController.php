@@ -8,7 +8,10 @@ use App\Models\EnglishSkillsModel;
 use App\Models\QuestionModel;
 use App\Models\QuestionAnswerModel;
 use App\Models\ExamUserModel;
+use App\Models\StudentModel;
+use App\Models\AdminModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ExamController extends Controller
 {
@@ -89,14 +92,46 @@ class ExamController extends Controller
       $exam_id = $data['exam_id'];
       $writingAnswers = session('writing_answers');
       $listeningAnswers = session('listening_answers');
-      
+      $student= session('user');
       $examUser = new ExamUserModel();
-      $examUser->user_id = 1;
+      $examUser->user_id = $student->student_id;
       $examUser->exam_id = $exam_id;
       $examUser->writing = $writingAnswers;
       $examUser->listening = $listeningAnswers;
       $examUser->reading = $readingAnswers;
-      $examUser->save();  
+      $examUser->save(); 
+
+      if($examUser){
+         $teacherId = $student->teacher_id;
+         $saleId = $student->sale_id;
+         $teacherMail = AdminModel::where('admin_id', $teacherId)->pluck('admin_email')->first();
+         $saleMail = AdminModel::where('admin_id', $saleId)->pluck('admin_email')->first();
+         $data = [
+             'fullname' =>  $student->student_firstname . $student->student_lastname,
+             'phone' =>  $student->student_phone,
+             'email' => $student->student_email,
+         ];
+        
+         
+
+         if ($teacherMail) {
+            Mail::send('fontend.page.email.view_email', ['data' => $data], function ($email) use ($teacherMail) {
+                $email->to($teacherMail);
+                $email->subject('THÔNG TIN HỌC SINH ĐÃ LÀM BÀI TEST');
+            });
+        }
+
+        if ($saleMail) {
+         Mail::send('fontend.page.email.view_email', ['data' => $data], function ($email) use ($saleMail) {
+             $email->to($saleMail);
+             $email->subject('THÔNG TIN HỌC SINH ĐÃ LÀM BÀI TEST');
+         });
+     }
+
+        
+
+     }
+      return view('fontend.page.exams.notifi_exam'); 
    }
 
    public function testView(){

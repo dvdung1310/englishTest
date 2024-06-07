@@ -35,11 +35,7 @@ class DashboardController extends Controller
         $result =AdminModel::where('admin_user',$admin_user)->where('admin_password',$admin_password)->first();
         if($result){
             Session::put('admin', $result);
-<<<<<<< HEAD
-            return Redirect::to('/list_exam');
-=======
             return Redirect::to('dashboard');
->>>>>>> 8469fd47b502a85bfab77b2336a5c0e562463856
         }
         else{
         //    Session::put('error','Mật khẩu hoặc tài khoản không đúng');

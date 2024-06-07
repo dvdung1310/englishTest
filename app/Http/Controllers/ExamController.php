@@ -97,7 +97,7 @@ class examController extends Controller
         }
         $skillListening->save();
         
-        return redirect()->back()->with('successWriting', 'Bài lưu Listening thành công.');
+        return redirect()->back()->with('successListening', 'Bài lưu Listening thành công.');
     }
 
     public function storeReading(Request $request){
@@ -165,7 +165,7 @@ class examController extends Controller
         $music->parent_id = 0;
         $music->skills_id = $data['skills_id'];
         $music->save();
-        return redirect()->back()->with('success', 'File âm thanh đã được lưu thành công.');
+        return redirect()->back()->with('successFileMusic', 'File âm thanh đã được lưu thành công.');
 
     }
 
