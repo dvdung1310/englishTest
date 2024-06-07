@@ -32,15 +32,15 @@
                         <img src="{{ asset('frontend/images/logo-app.png') }}" alt="">
                     </div>
                     <h5 class="text-center">THÔNG TIN ĐĂNG NHẬP</h5>
-                    <form action="{{ route('admin_login') }}" method="post">
+                    <form action="{{ route('user_login') }}" method="post">
                         {{ csrf_field() }}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tài khoản</label>
-                            <input type="text" class="form-control" name="admin_user" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" name="student_username" id="exampleFormControlInput1">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput12" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" name="admin_password"
+                            <input type="password" class="form-control" name="student_password"
                                 id="exampleFormControlInput12">
                         </div>
                         <div>
